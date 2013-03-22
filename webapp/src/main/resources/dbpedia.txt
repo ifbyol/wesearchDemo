@@ -1,0 +1,1 @@
+http://mappings.dbpedia.org/server/ontology/dbpedia.owl
