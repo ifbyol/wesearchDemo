@@ -26,6 +26,7 @@ import org.weso.wesearch.factories.WesearchFactory;
 import org.weso.wesearch.factories.impl.JenaWesearchFactory;
 
 import com.google.gson.Gson;
+import com.sun.jersey.api.json.JSONWithPadding;
 
 import es.weso.demo.util.StringToSPARQLQuery;
 import es.weso.demo.util.StringToValueSelector;
@@ -37,77 +38,93 @@ public abstract class Services {
 	protected Gson gson = new Gson();
 	
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
 	@Path("obtenerClases")
 	public Response getMatters(
-			@QueryParam("string") @DefaultValue("") String stem) {
+			@QueryParam("string") @DefaultValue("") String stem, 
+			@QueryParam("callback") @DefaultValue("demo") String callback) {
+		JSONWithPadding response = null;
 		Matters result = null;		
 		try {
 			result = wesearch.getMatters(stem);
-			return Response.ok(result).build();
+			response = new JSONWithPadding(result, callback);
+			return Response.ok(response).build();
 		} catch (WesearchException e) {
 			return Response.serverError().build();
 		}
 	}
 	
 	@POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("obtenerPropiedades")
 	public Response getProperties(MatterImpl matter, 
-			@QueryParam("string") @DefaultValue("") String stem) {
+			@QueryParam("string") @DefaultValue("") String stem,
+			@QueryParam("callback") @DefaultValue("demo") String callback) {
+		JSONWithPadding response = null;
 		Properties result = null;
 		try {
 			result = wesearch.getProperties(matter, stem);
-			return Response.ok(result).build();
+			response = new JSONWithPadding(result, callback);
+			return Response.ok(response).build();
 		} catch (WesearchException e) {
 			return Response.serverError().build();
 		}
 	}
 	
 	@POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
     @Path("obtenerSelector")
     public Response getValueSelector(@FormParam("matter")String matter,
-                                          @FormParam("property") String property) {
+              @FormParam("property") String property,
+              @QueryParam("callback") @DefaultValue("demo") String callback) {
         MatterImpl matterObj = gson.fromJson(matter, MatterImpl.class);
-        JenaPropertyImpl propertyObj = gson.fromJson(property, JenaPropertyImpl.class);
+        JenaPropertyImpl propertyObj = gson.fromJson(property, 
+        		JenaPropertyImpl.class);
         ValueSelector result = null;
+        JSONWithPadding response = null;
         try {
             result = wesearch.getValueSelector(matterObj, propertyObj);
-            return Response.ok(result).build();
+            response = new JSONWithPadding(result, callback);
+            return Response.ok(response).build();
         } catch (WesearchException e) {
             return Response.serverError().build();
         }
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
     @Path("crearConsulta")
     public Response createQuery(@FormParam("matter")String matter,
-                                @FormParam("property") String property,
-                                @FormParam("selector") String selector) {
+            @FormParam("property") String property,
+            @FormParam("selector") String selector,
+            @QueryParam("callback") @DefaultValue("demo") String callback) {
         MatterImpl matterObj = gson.fromJson(matter, MatterImpl.class);
-        JenaPropertyImpl propertyObj = gson.fromJson(property, JenaPropertyImpl.class);
+        JenaPropertyImpl propertyObj = gson.fromJson(property, 
+        		JenaPropertyImpl.class);
         ValueSelector selectorObj = StringToValueSelector.parse(selector);
+        JSONWithPadding response = null;
         try {
             Query result = wesearch.createQuery(matterObj, propertyObj,
                     selectorObj);
+            response = new JSONWithPadding(result, callback);
             //return Response.ok(result.obtainQuery()).build();
-            return Response.ok(result).build();
+            return Response.ok(response).build();
         } catch (WesearchException e) {
             return Response.serverError().build();
         }
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
     @Path("combinarConsulta")
     public Response combineQuery(@FormParam("query")String query,
-                                 @FormParam("matter") String matter,
-                                 @FormParam("property") String property,
-                                 @FormParam("selector") String selector){
+             @FormParam("matter") String matter,
+             @FormParam("property") String property,
+             @FormParam("selector") String selector,
+             @QueryParam("callback") @DefaultValue("demo") String callback){
         SPARQLQuery queryObj = null;
+        JSONWithPadding response = null;
         try {
             queryObj = StringToSPARQLQuery.parse(query);
             MatterImpl matterObj = gson.fromJson(matter, MatterImpl.class);
@@ -116,7 +133,8 @@ public abstract class Services {
             ValueSelector selectorObj = StringToValueSelector.parse(selector);
             Query result = wesearch.combineQuery(queryObj, matterObj, 
             		propertyObj, selectorObj);
-            return Response.ok(result).build();
+            response = new JSONWithPadding(result, callback);
+            return Response.ok(response).build();
         } catch (WesearchException e) {
             return Response.serverError().build();
         } catch (IOException e) {
@@ -125,8 +143,9 @@ public abstract class Services {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
     @Path("buscar")
-    public abstract Response search(@FormParam("query") String query);
+    public abstract Response search(@FormParam("query") String query,
+    		@QueryParam("callback") @DefaultValue("demo") String callback);
 
 }
