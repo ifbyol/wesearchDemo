@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Wesearch demos</title>
+		<script src="scripts/jquery-1.9.1.js"></script>
+		<script src="scripts/config.js"></script>
+		<script src="scripts/wesearch.js"></script>
+		<script src="scripts/functions.js"></script>
+		<script>
+			function init() {
+				var div = $('#tab');
+				console.log('Entró');
+				var table = $('<table id="clauses"/>');
+				var tr = $('<tr class="table-headers"/>');
+				var thClass = $('<th />');
+				thClass.text('Select class');
+				var thProp = $('<th />');
+				thProp.text('Select property');
+				var thSelector = $('<th />');
+				thSelector.text('Introduce value');
+				tr.append(thClass);
+				tr.append(thProp);
+				tr.append(thSelector);
+				table.append(tr);
+				var firstRow = createFirstRow();
+				table.append(firstRow);
+				div.append(table);
+			}
+		</script>
+		
+		<link rel="stylesheet" href="styles/style.css"/>
+	</head>
+
+	<body onload="init()">
+		<h1>Wesearch demo</h1>
+		
+		<p>This is an introduction paragraph</p>
+		
+		<h2>Build the query</h2>
+		
+		<div id="tab" align="center">
+			<!--<table id="clauses">
+				<tr class="table-headers">
+					<th>
+						Select class
+					</th>
+					<th>
+						Select property
+					</th>
+					<th>
+						Introduce value
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<input type="text" class="classes" onchange="searchClasses()" />
+					</td>
+					<td>
+						<input type="text" class="properties" onchange="searchProperties()"/>
+					</td>
+					<td class="selector">
+						
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<select class="possible-classes" hidden="hidden" onchange="changeProperties()"> </select>
+					</td>
+					<td>
+						<select class="possible-properties" hidden="hidden" onchange="obtainSelector()"> </select>
+					</td>
+					<td>
+						<button class="bt_add" hidden onclick="addClauseRows()">Añadir clausulas</button>
+					</td>
+				</tr>
+			</table>-->
+		</div>
+		<button onclick="create()" id="bt_create" hidden>Crear consulta</button>
+		<button onclick="show()" id="bt_show" hidden>Mostrar consulta</button>
+		
+		<h2>Query</h2>
+		
+		<p>In this section you can visualize the query</p>
+		
+		<textarea id="queryText" readonly="readonly" rows="20" cols="150">It's a text area to visualize the query</textarea>
+		<button id="bt_execute" onclick="executeQuery()" hidden>Ejecutar consulta</button>
+		<!--<button onclick="getMatters('minist', 'bcn')">Obtener clases</button>
+		<button onclick="getProperties('matter', 'nacido', 'bcn')">Obtener propiedades</button>
+		<button onclick="getValueSelector('matter', 'property', 'bcn')">Obtener selector</button>
+		<button onclick="createQuery('matter', 'property', 'selector', 'bcn')">Crear consulta</button>
+		<button onclick="combineQuery('matter', 'property', 'selector', 'query', 'bcn')">Combinar consulta</button>-->
+	</body>
+</html>
