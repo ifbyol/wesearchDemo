@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns="http://datos.bcn.cl/ontologies/bcn-norms#"
+    xmlns:bcnnorms="http://datos.bcn.cl/ontologies/bcn-norms#"
+    xmlns:dbpedia-owl="http://dbpedia.org/resource/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/#"
+    xmlns:gn="http://www.geonames.org/ontology#"
+    xmlns:log="http://www.w3.org/2000/10/swap/log#"
+    xmlns:org="http://www.w3.org/ns/org#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+    <rdf:Description>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ontologia de Normas para la Biblioteca del Congreso Nacional de Chile</rdfs:comment>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Ontology of Norms for Library of Congress of Chile</rdfs:comment>
+    </rdf:Description>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Category">
+        <rdfs:comment xml:lang="es">Describe metodos de agrupacion a los que una norma puede pertenecer.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes grouping methods to which a norm can belong.</rdfs:comment>
+        <rdfs:label xml:lang="es">Categoria</rdfs:label>
+        <rdfs:label xml:lang="en">Category</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#CategoryByKeyword">
+        <rdfs:comment xml:lang="es">Describe la categoria por palabra clave, una extension de categoria a los que una norma puede pertenecer.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes the By Keyword Category, a extension of Category to which a norm can belong.</rdfs:comment>
+        <rdfs:label xml:lang="es">CategoriaPorPalabraClave</rdfs:label>
+        <rdfs:label xml:lang="en">CategoryByKeyword</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Category"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Classification">
+        <rdfs:comment xml:lang="es">Describe metodos de agrupacion a los que una Categoria puede pertenecer.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes grouping methods to which a Category can belong.</rdfs:comment>
+        <rdfs:label xml:lang="es">Clasificacion</rdfs:label>
+        <rdfs:label xml:lang="en">Classification</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Collection"/>
+        <skos:related rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Rectification"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Country">
+        <rdfs:comment xml:lang="es">Describe un pais para la relacion con la clase Treaty (Tratado Internacional).</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a Country for the relationship with Treaty class.</rdfs:comment>
+        <rdfs:label xml:lang="en">Country</rdfs:label>
+        <rdfs:label xml:lang="es">Pais</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://dbpedia.org/resource/Country"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization">
+        <rdfs:comment xml:lang="en">A governmental Organization that is creator of a Norm.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Una organizacion gubernamental que es creadora de una norma.</rdfs:comment>
+        <rdfs:label xml:lang="en">GovernmentalOrganization</rdfs:label>
+        <rdfs:label xml:lang="es">OrganizacionGubernamental</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/org#FormalOrganization"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganizationOriginal">
+        <rdfs:comment xml:lang="es">Esta clase es una organizacion creada para resoler un desajuste entre la base de datos y las tripletas RDF.</rdfs:comment>
+        <rdfs:comment xml:lang="en">This class is an organization created for resolve a mismatch between the data base and the RDF triples.</rdfs:comment>
+        <rdfs:label xml:lang="en">GovernmentalOrganizationOriginal</rdfs:label>
+        <rdfs:label xml:lang="es">OrganizacionGubernamentalOriginal</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#InternationalOrganization">
+        <rdfs:comment xml:lang="en">A international Organization that is related with a treaty.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Una organizacion internacional que esta relacionada con un tratado.</rdfs:comment>
+        <rdfs:label xml:lang="en">InternationalOrganization</rdfs:label>
+        <rdfs:label xml:lang="es">OrganizacionInternacional</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/ns/org#FormalOrganization"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Norm">
+        <rdfs:comment xml:lang="es">Mediante esta clase se describe la estructura base de una norma a nivel generico en el contexto legislativo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Through this class a base norm structure is described from legislative context.</rdfs:comment>
+        <rdfs:label xml:lang="en">Norm</rdfs:label>
+        <rdfs:label xml:lang="es">Norma</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+        <owl:equivalentClass rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:cardinality>
+            <owl:onProperty rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#publishDate"/>
+        </owl:equivalentClass>
+        <owl:equivalentClass rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:cardinality>
+            <owl:onProperty rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#hasNumber"/>
+        </owl:equivalentClass>
+        <owl:hasKey rdf:parseType="Resource">
+            <rdf:first rdf:resource="http://purl.org/dc/elements/1.1/identifier"/>
+            <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </owl:hasKey>
+        <skos:altLabel xml:lang="es">Ley</skos:altLabel>
+        <skos:altLabel xml:lang="en">Norm</skos:altLabel>
+        <skos:prefLabel xml:lang="en">Norm</skos:prefLabel>
+        <skos:prefLabel xml:lang="es">Norma</skos:prefLabel>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance">
+        <rdfs:comment xml:lang="es">Mediante esta clase se describe una instancna de norma a nivel generico en el contexto legislativo, agregando una fecha de version y otros metadatos.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Through this class a norm instance is described from legislative context, adding a version date and other metadata.</rdfs:comment>
+        <rdfs:label xml:lang="en">NormInstance</rdfs:label>
+        <rdfs:label xml:lang="es">NormaVersionada</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <owl:equivalentClass rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</owl:cardinality>
+            <owl:onProperty rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#promulgationDate"/>
+        </owl:equivalentClass>
+        <skos:altLabel xml:lang="es">Instancia de Ley</skos:altLabel>
+        <skos:altLabel xml:lang="en">Law Instance</skos:altLabel>
+        <skos:prefLabel xml:lang="es">Instancia de Norma</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">Norm Instance</skos:prefLabel>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#NormType">
+        <rdfs:comment xml:lang="es">Describe un tipo de norma en contexto legislativo. </rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a type norm in legislative context.</rdfs:comment>
+        <rdfs:label xml:lang="en">NormType</rdfs:label>
+        <rdfs:label xml:lang="es">TipoDeNorma</rdfs:label>
+        <rdfs:subClassOf rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Restriction"/>
+            <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxCardinality>
+            <owl:onProperty rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#type"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#RecastedText">
+        <rdfs:comment xml:lang="es">Describe un texto publicado para actualizar normas antiguas.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a text published for update old norms.</rdfs:comment>
+        <rdfs:label xml:lang="en">RecastedText</rdfs:label>
+        <rdfs:label xml:lang="es">TextoRefundido</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Rectification">
+        <rdfs:comment xml:lang="es">Describe un texto publicado como actualizaci&#38;oacute;n por alg&#38;uacute;n error de tipeo o similar detectado en tora norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a text published as update for any typing error detected in another norm.</rdfs:comment>
+        <rdfs:label xml:lang="es">Rectificacion</rdfs:label>
+        <rdfs:label xml:lang="en">Rectification</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#RootNorm">
+        <rdfs:comment xml:lang="es">Mediante esta clase se describe una norma a nivel generico en el contexto legislativo.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Through this class a norm is described from legislative context.</rdfs:comment>
+        <rdfs:label xml:lang="es">NormaRaiz</rdfs:label>
+        <rdfs:label xml:lang="en">RootNorm</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <skos:altLabel xml:lang="es">LeyRaiz</skos:altLabel>
+        <skos:altLabel xml:lang="en">RootLaw</skos:altLabel>
+        <skos:prefLabel xml:lang="es">NormaRaiz</skos:prefLabel>
+        <skos:prefLabel xml:lang="en">RootNorm</skos:prefLabel>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#Treaty">
+        <rdfs:comment xml:lang="es">Describe una norma en el contexto legislativo relacionado con un pais externo u organizacion internacional. Tambien es llamada tratado internacional.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a norm in legislative context related with a external country or international organization. This is called too International Treaty.</rdfs:comment>
+        <rdfs:label xml:lang="es">Tratado</rdfs:label>
+        <rdfs:label xml:lang="en">Treaty</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+    </owl:Class>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#abbreviation">
+        <rdfs:comment xml:lang="es">Define una abreviacion para una cadena de caracteres.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a abbreviation for a character string.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormType"/>
+        <rdfs:label xml:lang="en">abbreviation</rdfs:label>
+        <rdfs:label xml:lang="es">abreviacion</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#agreeWith">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:comment xml:lang="en">Define a correspondency between two norms.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Define una correspondencia entre dos normas.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="en">agreeWith</rdfs:label>
+        <rdfs:label xml:lang="es">concuerdaCon</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#alertedBy">
+        <rdfs:comment xml:lang="en">An advice in an obsolete norm if there is a most current recasted text.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Un aviso en una norma obsoleta si existe un texto refundido mas actual.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">alertadoPor</rdfs:label>
+        <rdfs:label xml:lang="en">alertedBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#RecastedText"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#createdBy">
+        <rdfs:comment xml:lang="en">Defines the creator organization for a norm.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Determina la organizacion creadora de una norma.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">creadoPor</rdfs:label>
+        <rdfs:label xml:lang="en">createdBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#creatorOf">
+        <rdfs:comment xml:lang="en">Defines the norms created for an organization.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Determina las normas creadoras por una organizacion.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+        <rdfs:label xml:lang="es">creadorDe</rdfs:label>
+        <rdfs:label xml:lang="en">creatorOf</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#createdBy"/>
+    </owl:ObjectProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasCode">
+        <rdfs:comment xml:lang="es">Indica el codigo de pais en formato ISO-3166 alpha2.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates the country code in ISO-3166 alpha2 format.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Country"/>
+        <rdfs:label xml:lang="en">hasCode</rdfs:label>
+        <rdfs:label xml:lang="es">tieneCodigo</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:subPropertyOf rdf:resource="http://www.geonames.org/ontology#countryCode"/>
+    </owl:DatatypeProperty>
+
+    <owl:FunctionalProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasDocument">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+        <rdfs:comment xml:lang="es">Define una relacion entre un documento generico y una Norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between a generic document and a Norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="en">hasDocument</rdfs:label>
+        <rdfs:label xml:lang="es">tieneDocumento</rdfs:label>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/#Document"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#isDocumentOf"/>
+    </owl:FunctionalProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasHtmlDocument">
+        <rdfs:comment xml:lang="es">Define una relacion entre un documento Html y una Norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between a Html document and a Norm.</rdfs:comment>
+        <rdfs:label xml:lang="en">hasHtmlDocument</rdfs:label>
+        <rdfs:label xml:lang="es">tieneDocumentoHtml</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#hasDocument"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#isDocumentOf"/>
+    </owl:ObjectProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasName">
+        <rdfs:comment xml:lang="es">El nombre de una entidad.</rdfs:comment>
+        <rdfs:comment xml:lang="en">The name of a entity.</rdfs:comment>
+        <rdfs:domain rdf:parseType="Resource">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+            <owl:unionOf rdf:parseType="Resource">
+                <rdf:first rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormType"/>
+                <rdf:rest rdf:parseType="Resource">
+                    <rdf:first rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+                    <rdf:rest rdf:parseType="Resource">
+                        <rdf:first rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#InternationalOrganization"/>
+                        <rdf:rest rdf:parseType="Resource">
+                            <rdf:first rdf:resource="http://xmlns.com/foaf/0.1/#Document"/>
+                            <rdf:rest rdf:parseType="Resource">
+                                <rdf:first rdf:resource="http://dbpedia.org/resource/Country"/>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:rest>
+                        </rdf:rest>
+                    </rdf:rest>
+                </rdf:rest>
+            </owl:unionOf>
+        </rdfs:domain>
+        <rdfs:label xml:lang="en">hasName</rdfs:label>
+        <rdfs:label xml:lang="es">tieneNombre</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasNumber">
+        <rdfs:comment xml:lang="es">Define un numero para una norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a number for a Norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="en">hasNumber</rdfs:label>
+        <rdfs:label xml:lang="es">tieneNumero</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasTag">
+        <rdfs:comment xml:lang="es">Define una etiqueta para una instancia de Thing.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a tag for a a Thing instance.</rdfs:comment>
+        <rdfs:label xml:lang="en">hasTag</rdfs:label>
+        <rdfs:label xml:lang="es">tieneEtiqueta</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasTreaty">
+        <rdfs:comment xml:lang="es">Describe una relacion entre un pais u organizacion internacional y sus Tratados.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a relationship between a Country or International Organization and their Treaties.</rdfs:comment>
+        <rdfs:label xml:lang="en">hasTreaty</rdfs:label>
+        <rdfs:label xml:lang="es">tieneTratado</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Treaty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasVersion">
+        <rdfs:comment xml:lang="es">Define que una norma raiz tiene versiones de la norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines that a root norm has got versions of the norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#RootNorm"/>
+        <rdfs:label xml:lang="en">hasVersion</rdfs:label>
+        <rdfs:label xml:lang="es">tieneVersion</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#versionOf"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#hasXmlDocument">
+        <rdfs:comment xml:lang="es">Define una relacion entre un documento Xml y una Norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between a Xml document and a Norm.</rdfs:comment>
+        <rdfs:label xml:lang="en">hasXmlDocument</rdfs:label>
+        <rdfs:label xml:lang="es">tieneDocumentoXml</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#hasDocument"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#isDocumentOf"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isDocumentOf">
+        <rdfs:comment xml:lang="es">Indica que un documento pertenece a una norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates that a document belongs to a Norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/#Document"/>
+        <rdfs:label xml:lang="es">esDocumentoDe</rdfs:label>
+        <rdfs:label xml:lang="en">isDocumentOf</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+    </owl:ObjectProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isLatestVersion">
+        <rdfs:comment xml:lang="es">Indica si una instancia de norma es la ultima version de esta.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates if a norm instance is the latest version.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">esUltimaVersion</rdfs:label>
+        <rdfs:label xml:lang="en">isLatestVersion</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isModifiedBy">
+        <rdfs:comment xml:lang="es">Define una relacion entre dos normas, donde la primera es modificada por la segunda.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between two norms, where the first is modified by the second.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">esModificadoPor</rdfs:label>
+        <rdfs:label xml:lang="en">isModifiedBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isRecastedBy">
+        <rdfs:comment xml:lang="es">Indica que una norma es actualizada a traves de una instancia de RecastedText (TextoRefundido)</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates that a Norm is updated through a RecastedText instance.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+        <rdfs:label xml:lang="es">esRefundidoPor</rdfs:label>
+        <rdfs:label xml:lang="en">isRecastedBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#RecastedText"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#recasts"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isRectifiedBy">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:comment xml:lang="es">Indica que una Norma o Rectificacion es rectificada por una instancia de rectificacion.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates that a Norm or Rectification instance is rectified by a Rectification instance.</rdfs:comment>
+        <rdfs:label xml:lang="es">esRectificadoPor</rdfs:label>
+        <rdfs:label xml:lang="en">isRectifiedBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Rectification"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isRegulatedBy">
+        <rdfs:comment xml:lang="es">Define una relacion entre dos normas, donde la primera es regulada por una segunda norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between two norms, where a first norm is regulated by a second norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">esReguladoPor</rdfs:label>
+        <rdfs:label xml:lang="en">isRegulatedBy</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#regulates"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#isTreatyWith">
+        <rdfs:comment xml:lang="es">Define una relacion entre una instancia de norma y un pais u organizacion internacional.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between a Norm instance and a Country or International Organization.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Treaty"/>
+        <rdfs:label xml:lang="es">esTratadoCon</rdfs:label>
+        <rdfs:label xml:lang="en">isTreatyWith</rdfs:label>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#hasTreaty"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#modifiesTo">
+        <rdfs:comment xml:lang="es">Define una relacion entre dos normas, donde la primera modifica a la segunda.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between two norms, where the first modifies to second.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">modificaA</rdfs:label>
+        <rdfs:label xml:lang="en">modifiesTo</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#isModifiedBy"/>
+    </owl:ObjectProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#promulgationDate">
+        <rdfs:comment xml:lang="es">Define la fecha de promulgacion de un recurso.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines the promulgation date of a resource.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+        <rdfs:label xml:lang="es">fechaPromugacion</rdfs:label>
+        <rdfs:label xml:lang="en">promulgationDate</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/date"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#publishDate">
+        <rdfs:comment xml:lang="es">Define la fecha de publicacion de un recurso.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines the publication date of a resource.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">fechaPublicacion</rdfs:label>
+        <rdfs:label xml:lang="en">publishDate</rdfs:label>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/date"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#recasts">
+        <rdfs:comment xml:lang="es">Indica que una instancia de RecastedText (Texto Refundido) hace una actualizacion del contenido de una instancia de norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates that a RecastedText instance make update of the content of a Norm instance.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#RecastedText"/>
+        <rdfs:label xml:lang="en">recasts</rdfs:label>
+        <rdfs:label xml:lang="es">refundeA</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#rectifies">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:comment xml:lang="es">Indica que una instancia de Rectificacion rectifica a una instancia de Norma o Rectificacion.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Indicates that a Rectification instance rectifies to a Norm or Rectification instance.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Rectification"/>
+        <rdfs:label xml:lang="es">rectifica</rdfs:label>
+        <rdfs:label xml:lang="en">rectifies</rdfs:label>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#isRectifiedBy"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#regulates">
+        <rdfs:comment xml:lang="es">Define una relacion entre dos normas, donde la primera es una regulacion sobre la segunda.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a relationship between two norms, where the first is a regulation over the second.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">regula</rdfs:label>
+        <rdfs:label xml:lang="en">regulates</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#subOrganizationOf">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+        <rdfs:comment xml:lang="en">Defines that a organization is sub organization of another.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Determina una organizacion sub organizacion de la otra.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+        <rdfs:label xml:lang="es">subOrganizacionDe</rdfs:label>
+        <rdfs:label xml:lang="en">subOrganizationOf</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#GovernmentalOrganization"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#type">
+        <rdfs:comment xml:lang="en">Defines the type of a norm.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Determina el tipo de una norma.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#Norm"/>
+        <rdfs:label xml:lang="es">deTipo</rdfs:label>
+        <rdfs:label xml:lang="en">type</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormType"/>
+    </owl:ObjectProperty>
+
+    <owl:DatatypeProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#versionDate">
+        <rdfs:comment xml:lang="es">Define la fecha de la version de un recurso.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines the version date of a resource.</rdfs:comment>
+        <rdfs:label xml:lang="es">fechaVersion</rdfs:label>
+        <rdfs:label xml:lang="en">versionDate</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/elements/1.1/date"/>
+    </owl:DatatypeProperty>
+
+    <owl:ObjectProperty rdf:about="http://datos.bcn.cl/ontologies/bcn-norms#versionOf">
+        <rdfs:comment xml:lang="es">Define que una norma es version de otra norma raiz.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a norm as version of another root norm.</rdfs:comment>
+        <rdfs:domain rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#NormInstance"/>
+        <rdfs:label xml:lang="es">versionDe</rdfs:label>
+        <rdfs:label xml:lang="en">versionOf</rdfs:label>
+        <rdfs:range rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#RootNorm"/>
+        <owl:inverseOf rdf:resource="http://datos.bcn.cl/ontologies/bcn-norms#hasVersion"/>
+    </owl:ObjectProperty>
+
+    <owl:Class rdf:about="http://dbpedia.org/resource/Country">
+    </owl:Class>
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/elements/1.1/date">
+        <rdfs:comment xml:lang="es">Define una fecha en formato dublin core.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a date in dublin core format.</rdfs:comment>
+        <rdfs:label xml:lang="en">date</rdfs:label>
+        <rdfs:label xml:lang="es">fecha</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/elements/1.1/identifier">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:comment xml:lang="en">Allows add an unique identifier to a resource.</rdfs:comment>
+        <rdfs:comment xml:lang="es">Permite agregar un identificador unico a un recurso.</rdfs:comment>
+        <rdfs:label xml:lang="es">identificador</rdfs:label>
+        <rdfs:label xml:lang="en">identifier</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/elements/1.1/language">
+        <rdfs:comment xml:lang="en">A language of the resource.</rdfs:comment>
+        <rdfs:comment xml:lang="es">El lenguaje de un recurso.</rdfs:comment>
+        <rdfs:label xml:lang="es">Idioma</rdfs:label>
+        <rdfs:label xml:lang="en">Language</rdfs:label>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/dc/elements/1.1/title">
+        <rdfs:comment xml:lang="es">Define un titulo para una Norma.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a title for a Norm.</rdfs:comment>
+        <rdfs:label xml:lang="en">title</rdfs:label>
+        <rdfs:label xml:lang="es">titulo</rdfs:label>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="http://www.geonames.org/ontology#countryCode">
+    </owl:DatatypeProperty>
+
+    <owl:AnnotationProperty rdf:about="http://www.w3.org/2000/01/rdf-schema#comment">
+    </owl:AnnotationProperty>
+
+    <rdf:Description rdf:about="http://www.w3.org/2002/07/owl#sameAs">
+        <rdfs:comment xml:lang="es">Define una URI con una referencia a un objeto.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines an URI with a reference to an object.</rdfs:comment>
+        <rdfs:label xml:lang="es">loMismoQue</rdfs:label>
+        <rdfs:label xml:lang="en">sameAs</rdfs:label>
+    </rdf:Description>
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Collection">
+        <rdfs:comment xml:lang="es">Define una coleccion de elementos.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a collection of elements.</rdfs:comment>
+        <rdfs:label xml:lang="es">Coleccion</rdfs:label>
+        <rdfs:label xml:lang="en">Collection</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.w3.org/2004/02/skos/core#Concept">
+        <rdfs:comment xml:lang="es">Define un concepto que puede existir dentro de una coleccion de elementos.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Defines a concept that may exist inner a collection.</rdfs:comment>
+        <rdfs:label xml:lang="en">Concept</rdfs:label>
+        <rdfs:label xml:lang="es">Concepto</rdfs:label>
+    </owl:Class>
+
+    <owl:Class rdf:about="http://www.w3.org/ns/org#FormalOrganization">
+    </owl:Class>
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/#Document">
+        <rdfs:comment xml:lang="es">Describe un documento relacionado a alguna instancia derivada de Thing.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Describes a document related to a instance of Thing.</rdfs:comment>
+        <rdfs:label xml:lang="en">Document</rdfs:label>
+        <rdfs:label xml:lang="es">Documento</rdfs:label>
+    </owl:Class>
+</rdf:RDF>

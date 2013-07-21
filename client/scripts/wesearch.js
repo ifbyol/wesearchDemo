@@ -3,6 +3,7 @@
  * string and the example ('bcn' or 'dbpedia')
  */
 function getMatters(stem, example) {
+	createLayer();
 	if(stem == null) {
 		stem = '';
 	}
@@ -27,6 +28,9 @@ function getMatters(stem, example) {
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }
@@ -36,6 +40,7 @@ function getMatters(stem, example) {
  * string and the example ('bcn' or 'dbpedia')
  */
 function getProperties(matter, stem, example) {
+	createLayer();
 	if(stem == null) {
 		stem = '';
 	}
@@ -62,6 +67,9 @@ function getProperties(matter, stem, example) {
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }
@@ -70,6 +78,7 @@ function getProperties(matter, stem, example) {
  *This function has to ask to wesearch the value selector from a given property and a matter 
  */
 function getValueSelector(matter, property, example) {
+	createLayer();
 	var params = 'matter=' + matter + '&property=' + property;
 	console.log('Parameters: ' + params);
 	var url = getBaseUrl(example, 'getselector');
@@ -96,6 +105,9 @@ function getValueSelector(matter, property, example) {
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }
@@ -105,13 +117,17 @@ function getValueSelector(matter, property, example) {
  * a example ('bcn' or 'dbpedia')
  */
 function createQuery(matter, property, selector, example) {
-	console.log('Data: ' + data);
+	createLayer();
 	var url = getBaseUrl(example, 'createquery');
 	console.log('URL: ' + url);
+	console.log('Matter: ' + matter);
+	console.log('Property: ' + property);
+	console.log('Selector: ' + selector);
 	var data = 'url=' + encodeURIComponent(url) + 
 		'&matter=' + encodeURIComponent(matter) + 
 		'&property=' + encodeURIComponent(property) + 
 		'&selector=' + encodeURIComponent(selector);
+		console.log('Data: ' + data);
 	$.ajax({
 		type: 'POST',
 		url: 'php/servicios.php',
@@ -122,7 +138,7 @@ function createQuery(matter, property, selector, example) {
 		success: function (data, status, jqXHR) {
 			console.log('Data: ' + JSON.stringify(data));
 			lastQuery = data;
-			showButtons();
+			showQuery(lastQuery['query']);
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			console.log('error: ' + errorThrown);
@@ -131,6 +147,9 @@ function createQuery(matter, property, selector, example) {
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }
@@ -140,19 +159,30 @@ function createQuery(matter, property, selector, example) {
  * property and selector
  */
 function combineQuery(matter, property, selector, query, example){
-	var data = 'matter=' + matter + '&property=' + property + '&selector=' + selector + '&query=' + query;
+	createLayer();
 	console.log('Data: ' + data);
 	var url = getBaseUrl(example, 'combinequery');
+	console.log('Matter: ' + matter);
+	console.log('Property: ' + property);
+	console.log('Selector: ' + selector);
+	console.log('Query: ' + /*JSON.stringify(*/query/*)*/);
+	var data = 'url=' + encodeURIComponent(url) + 
+		'&matter=' + encodeURIComponent(matter) + 
+		'&property=' + encodeURIComponent(property) + 
+		'&selector=' + encodeURIComponent(selector) + 
+		'&query=' + encodeURIComponent(/*JSON.stringify(*/query/*)*/);
 	console.log('URL: ' + url);
 	$.ajax({
 		type: 'POST',
-		url: url,
+		url: 'php/servicios.php',
 		dataType: 'jsonp',
 		data: data,
 		cache: true,
 		jsonpCallback: 'demo',
 		success: function (data, status, jqXHR) {
-			console.log('data: ' + data);
+			console.log('data: ' + JSON.stringify(data));
+			lastQuery = data;
+			showQuery(lastQuery['query']);
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			console.log('error: ' + errorThrown);
@@ -161,6 +191,9 @@ function combineQuery(matter, property, selector, query, example){
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }
@@ -169,6 +202,7 @@ function combineQuery(matter, property, selector, query, example){
  * This function has to execute the query that has form the user
  */
 function search(query, example) {
+	createLayer();
 	var url = getBaseUrl(example, 'search');
 	console.log('Query: ' + query);
 	var data = 'url=' + encodeURIComponent(url) + '&query=' + encodeURIComponent(query);
@@ -182,7 +216,7 @@ function search(query, example) {
 		jsonpCallback: 'demo',
 		success: function (data, status, jqXHR) {
 			console.log('Data: ' + JSON.stringify(data));
-			
+			showResults(data['results']);			
 		},
 		error: function (jqXHR, textStatus, errorThrown){
 			console.log('error: ' + errorThrown);
@@ -191,6 +225,9 @@ function search(query, example) {
 			404: function() {
 				console.log('URL not found');
 			}
+		},
+		complete: function(jqXHR, textStatus) {
+			deleteLayer();
 		}
 	});
 }

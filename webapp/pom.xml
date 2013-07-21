@@ -68,9 +68,16 @@
           <version>2.2.2</version>
           <scope>compile</scope>
       </dependency>
+      
+      <!-- Memcached Client -->
+		<dependency>
+			<groupId>com.googlecode.xmemcached</groupId>
+			<artifactId>xmemcached</artifactId>
+			<version>1.4.1</version>
+		</dependency>
     
   </dependencies>
   <build>
-    <finalName>WesomedDemo</finalName>
+    <finalName>WesearchDemo</finalName>
   </build>
 </project>

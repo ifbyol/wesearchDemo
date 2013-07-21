@@ -1,3 +1,3 @@
-http://datos.bcn.cl/ontologies/bcn-biographies/bcn-biographies.rdf
-http://datos.bcn.cl/ontologies/bcn-norms/doc/bcn-norms.rdf.xml
-http://datos.bcn.cl/ontologies/bcn-geographics/bcn-geographics.rdf
+/bcn-ontologies/bcn-biographies.rdf
+/bcn-ontologies/bcn-norms.rdf.xml
+/bcn-ontologies/bcn-geographics.rdf

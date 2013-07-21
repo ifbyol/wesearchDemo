@@ -1,1 +1,2 @@
-http://mappings.dbpedia.org/server/ontology/dbpedia.owl
+/dbpedia-ontologies/dbpedia.owl
+/dbpedia-ontologies/foaf.rdf

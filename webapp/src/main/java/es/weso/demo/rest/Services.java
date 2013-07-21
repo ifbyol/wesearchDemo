@@ -10,9 +10,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
+import org.apache.log4j.Logger;
 import org.weso.utils.WesearchException;
 import org.weso.wesearch.Wesearch;
 import org.weso.wesearch.domain.Matters;
@@ -21,21 +24,29 @@ import org.weso.wesearch.domain.Query;
 import org.weso.wesearch.domain.ValueSelector;
 import org.weso.wesearch.domain.impl.JenaPropertyImpl;
 import org.weso.wesearch.domain.impl.MatterImpl;
+import org.weso.wesearch.domain.impl.PropertiesImpl;
 import org.weso.wesearch.domain.impl.SPARQLQuery;
-import org.weso.wesearch.factories.WesearchFactory;
-import org.weso.wesearch.factories.impl.JenaWesearchFactory;
+import org.weso.wesearch.domain.impl.SubjectsImpl;
 
 import com.google.gson.Gson;
 import com.sun.jersey.api.json.JSONWithPadding;
 
+import es.weso.demo.exceptions.DemoException;
+import es.weso.demo.memcached.MemcachedRESTClient;
+import es.weso.demo.util.StringToPropertiesImpl;
 import es.weso.demo.util.StringToSPARQLQuery;
+import es.weso.demo.util.StringToSubjectsImpl;
 import es.weso.demo.util.StringToValueSelector;
 
 public abstract class Services {
 	
-	protected WesearchFactory factory = new JenaWesearchFactory();
+	@Context
+	protected UriInfo uriInfo;
 	protected Wesearch wesearch;
 	protected Gson gson = new Gson();
+	protected MemcachedRESTClient memcached = MemcachedRESTClient.getInstance();
+	
+	protected static Logger logger = Logger.getLogger(Services.class);
 	
 	@GET
 	@Produces({ "application/x-javascript", MediaType.APPLICATION_JSON })
@@ -44,10 +55,24 @@ public abstract class Services {
 			@QueryParam("string") @DefaultValue("") String stem, 
 			@QueryParam("callback") @DefaultValue("demo") String callback) {
 		JSONWithPadding response = null;
-		Matters result = null;		
+		Matters result = null;
+		String res = null;
+		String key = uriInfo.getAbsolutePath().getRawPath() + stem;
 		try {
-			result = wesearch.getMatters(stem);
+			res = memcached.execute(String.valueOf(key.hashCode()));
+			if(res == null) {
+				result = wesearch.getMatters(stem);
+				res = gson.toJson(result, SubjectsImpl.class);
+				try {
+					memcached.storeValue(String.valueOf(key.hashCode()), res);
+				} catch (DemoException e) {
+					logger.info(e.getMessage());
+				}
+			} else {
+				result = StringToSubjectsImpl.parse(res);
+			}			
 			response = new JSONWithPadding(result, callback);
+			logger.info(key);
 			return Response.ok(response).build();
 		} catch (WesearchException e) {
 			return Response.serverError().build();
@@ -63,8 +88,22 @@ public abstract class Services {
 			@QueryParam("callback") @DefaultValue("demo") String callback) {
 		JSONWithPadding response = null;
 		Properties result = null;
+		String res = null;
+		String key = uriInfo.getAbsolutePath().getRawPath()+ "/" + stem + "/" +
+				gson.toJson(matter, MatterImpl.class);
 		try {
-			result = wesearch.getProperties(matter, stem);
+			res = memcached.execute(String.valueOf(key.hashCode()));
+			if(res == null) {
+				result = wesearch.getProperties(matter, stem);
+				res = gson.toJson(result, PropertiesImpl.class);
+				try {
+					memcached.storeValue(String.valueOf(key.hashCode()), res);
+				} catch (DemoException e) {
+					logger.info(e.getMessage());
+				}
+			} else {
+				result = StringToPropertiesImpl.parse(res);
+			}
 			response = new JSONWithPadding(result, callback);
 			return Response.ok(response).build();
 		} catch (WesearchException e) {
@@ -83,7 +122,7 @@ public abstract class Services {
         		JenaPropertyImpl.class);
         ValueSelector result = null;
         JSONWithPadding response = null;
-        try {
+        try {	
             result = wesearch.getValueSelector(matterObj, propertyObj);
             response = new JSONWithPadding(result, callback);
             return Response.ok(response).build();
@@ -123,6 +162,10 @@ public abstract class Services {
              @FormParam("property") String property,
              @FormParam("selector") String selector,
              @QueryParam("callback") @DefaultValue("demo") String callback){
+    	logger.info("MATTER: " + matter);
+    	logger.info("PROPERTY: " + property);
+    	logger.info("SELECTOR: " + selector);
+    	logger.info("QUERY: " + query);
         SPARQLQuery queryObj = null;
         JSONWithPadding response = null;
         try {

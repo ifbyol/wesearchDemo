@@ -7,7 +7,7 @@
 	curl_setopt( $ch, CURLOPT_POST, true );
 	curl_setopt( $ch, CURLOPT_POSTFIELDS, $json );
 	curl_setopt($ch, CURLOPT_HTTPHEADER, Array('Content-Type: application/json'));
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 1000);
 	$result = curl_exec($ch);
 	curl_close($ch);
 	

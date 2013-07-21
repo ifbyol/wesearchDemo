@@ -4,11 +4,29 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Wesearch demos</title>
+		<title>Wesearch</title>
+		
 		<script src="scripts/jquery-1.9.1.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+		<!-- <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script> -->
+		<!-- <script src="scripts/jquery.colorpicker.js"></script> -->
+		<script src="scripts/sonic.js"></script>
+		<script src="scripts/loadLayer.js"></script>
 		<script src="scripts/config.js"></script>
 		<script src="scripts/wesearch.js"></script>
 		<script src="scripts/functions.js"></script>
+		<script src="scripts/d3/d3.v2.js"></script>
+		<link  id="cssLoad" rel="stylesheet" type="text/css" href="styles/Loading.css">
+		<link  rel="stylesheet" type="text/css" href="styles/foundation.css">
+		<link  rel="stylesheet" type="text/css" href="styles/sites.css">
+		<link href='http://fonts.googleapis.com/css?family=Iceland' rel='stylesheet' type='text/css'>
+		
+		<!-- <link href="styles/jquery.colorpicker.css" rel="stylesheet" type="text/css"/>
+		<script src="scripts/jquery.ui.colorpicker-en.js"></script>
+
+
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+		
 		<script>
 			function init() {
 				var div = $('#tab');
@@ -26,7 +44,9 @@
 				tr.append(thSelector);
 				table.append(tr);
 				var firstRow = createFirstRow();
+				var secondRow = createSecondRow();
 				table.append(firstRow);
+				table.append(secondRow);
 				div.append(table);
 			}
 		</script>
@@ -35,62 +55,43 @@
 	</head>
 
 	<body onload="init()">
-		<h1>Wesearch demo</h1>
+		<nav class="top-bar">
+			<ul class="title-area">
+				<li class="name"><a class="brand" href="#"><h1>WESEARCH</h1></a></li>
+				<li class="toggle-topbar menu-icon">
+					<a href="#"><span>Menu</span></a>
+				</li>
+			</ul>
+		</nav>
 		
-		<p>This is an introduction paragraph</p>
+		<!--<p>This is a demostration of the Wesearch library that allows build SPARQL queries. In this demo, you can generate queries over BCN's ontologies or DBpedia's ontologies, and execute them in their endpoints in order to test the library funcionality.</p>
+		
+		<p>In order to generate queries, you have to follow these steps:</p>
+		
+		<ol>
+			<li>First, you have to search the type  </li>
+		</ol>-->
 		
 		<h2>Build the query</h2>
 		
+		<div align="center">Select domain: <select id="example">
+			<option value="bcn">BCN example</option>
+			<option value="dbpedia">DBPedia example</option>
+		</select></div>
+		
 		<div id="tab" align="center">
-			<!--<table id="clauses">
-				<tr class="table-headers">
-					<th>
-						Select class
-					</th>
-					<th>
-						Select property
-					</th>
-					<th>
-						Introduce value
-					</th>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" class="classes" onchange="searchClasses()" />
-					</td>
-					<td>
-						<input type="text" class="properties" onchange="searchProperties()"/>
-					</td>
-					<td class="selector">
-						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<select class="possible-classes" hidden="hidden" onchange="changeProperties()"> </select>
-					</td>
-					<td>
-						<select class="possible-properties" hidden="hidden" onchange="obtainSelector()"> </select>
-					</td>
-					<td>
-						<button class="bt_add" hidden onclick="addClauseRows()">Añadir clausulas</button>
-					</td>
-				</tr>
-			</table>-->
 		</div>
-		<button onclick="create()" id="bt_create" hidden>Crear consulta</button>
-		<button onclick="show()" id="bt_show" hidden>Mostrar consulta</button>
+		
+		<div id="buttons" align="center">
+			<button onclick="create()" id="bt_show" hidden>Mostrar consulta</button>
+			<button onclick="refresh()">Nueva consulta</button>
+		</div>
 		
 		<h2>Query</h2>
 		
 		<p>In this section you can visualize the query</p>
 		
-		<textarea id="queryText" readonly="readonly" rows="20" cols="150">It's a text area to visualize the query</textarea>
+		<textarea id="queryText" readonly="readonly" rows="10" cols="150">It's a text area to visualize the query</textarea>
 		<button id="bt_execute" onclick="executeQuery()" hidden>Ejecutar consulta</button>
-		<!--<button onclick="getMatters('minist', 'bcn')">Obtener clases</button>
-		<button onclick="getProperties('matter', 'nacido', 'bcn')">Obtener propiedades</button>
-		<button onclick="getValueSelector('matter', 'property', 'bcn')">Obtener selector</button>
-		<button onclick="createQuery('matter', 'property', 'selector', 'bcn')">Crear consulta</button>
-		<button onclick="combineQuery('matter', 'property', 'selector', 'query', 'bcn')">Combinar consulta</button>-->
 	</body>
 </html>

@@ -1,18 +1,35 @@
 h1 {
 	text-align: center;
+	color: white;
 }
 
 table{
-	width: 40%;
+	width: 80%;
 }
 
 td{
 	max-width: 40px;
 }
 
-input, select {
+input, table button {
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 	width: 90%;
 	margin: auto;
+}
+
+table select {
+	width: 90%;
+	margin: auto;
+}
+
+select{
+	font-family: 'Iceland', cursive;
+	font-size: 16px;
+}
+
+table {
+    /*border-collapse: collapse;*/
+    border-spacing: 0;
 }
 
 /*tr {
@@ -22,3 +39,4 @@ input, select {
 .table-headers {
 	font-weight:bold;
 }
+

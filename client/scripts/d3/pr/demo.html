@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo</title>
+    <script type="text/javascript" src="../d3.v2.js"></script>
+    <style type="text/css">
+	
+	svg {
+  width: 960px;
+  height: 500px;
+  border: solid 3px #ccc;
+  background: #eee;
+}
+
+
+
+
+button {
+  font: 14px Helvetica Neue;
+  background-color: #222;
+  background-image: -moz-linear-gradient(top, rgba(255,255,255,.25), rgba(255,255,255,.11));
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, rgba(255,255,255,.25)),color-stop(1, rgba(255,255,255,.11)));
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.25), rgba(255,255,255,.11));
+  color: #fff;
+  text-rendering: optimizeLegibility;
+  text-shadow: 0 -1px 1px #222;
+  padding: 6px 10px 6px 10px;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #222;
+  margin: 0;
+  -moz-box-shadow: 0 1px 3px #999;
+  -webkit-box-shadow: 0 1px 3px #999;
+}
+
+button.first {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+button.last {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+button.active {
+  background-color: rgb(65,102,133);
+}
+
+button:hover {
+  background-color: steelblue;
+}
+
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
+}
+
+text.shadow {
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-opacity: .8;
+}
+
+	
+	</style>
+  
+  
+  </head>
+  <body>
+  <script type="text/javascript">
+  
+var w = 960;
+var h = 500;
+var r = 15;
+var fill = d3.scale.category20();
+var force = d3.layout.force().gravity(.01).charge(-120).linkDistance(30).size([w, h]);
+var svg = d3.select("body").append("svg").attr("width", w).attr("height", h);
+
+(function() {
+
+d3.json("datos.json",function(json) {
+var node1 = 
+  svg.selectAll("circle")
+		.data(json.nodes)
+		.enter().append("circle")
+		.attr("r", r - .75)
+		.style("fill", function(d) {return "blue" })
+		.style("stroke", function(d) { return d3.rgb(fill(d.group)).darker(); })
+		.call(force.drag);
+  force
+      .nodes(json.nodes)
+      .on("tick", tick)
+      .start();
+
+var text = svg.append("g").selectAll("g")
+    .data(force.nodes())
+	.enter().append("g");
+
+	text.append("text")
+		.attr("x", 18)
+		.attr("y", ".31em")
+	.text(function(d) { return d.name; });
+	  
+	  
+
+  function tick() {
+    node1.attr("cx", function(d) { return d.x = Math.max(r, Math.min(w - r, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(r, Math.min(h - r, d.y)); });
+		
+	text.attr("transform", function(d) {return "translate(" + d.x + "," + d.y + ")";});
+  }
+});
+
+})();
+/*
+(function() {
+d3.json("personas.json", function(json) {
+
+
+var node2 = svg.append("circle").selectAll("g")
+			.data(json.nodes)
+			.attr("r", r - .75)
+			.style("fill", function(d) {return "blue" })
+			.style("stroke", function(d) { return d3.rgb(fill(d.group)).darker(); });
+
+var node2 = 
+ svg.append("circle").selectAll("circle")
+			.data(json.nodes)
+			.attr("r", r - .75)
+			.style("fill", function(d) {return "blue" })
+			.style("stroke", function(d) { return d3.rgb(fill(d.group)).darker(); })
+			.call(force.drag);
+  force
+      .nodes(json.nodes)
+      .on("tick", tick)
+      .start();
+
+   
+   function tick() {
+    node2.attr("cx", function(d) { return d.x = Math.max(r, Math.min(w - r, d.x)); })
+        .attr("cy", function(d) { return d.y = Math.max(r, Math.min(h - r, d.y)); });
+		
+	
+  }
+
+});
+})();
+
+*/
+
+
+    </script>
+	
+	
+
+	<p>
+   <button id="Ejecutar">
+        Filtro Personas
+      </button><p>
+  </p>
+  </body>
+</html>
