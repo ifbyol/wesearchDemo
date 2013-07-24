@@ -272,6 +272,7 @@ we don't want the implied rdfs:domain here.
   </rdf:Property>
 <!-- ....................................................... -->
   <rdf:Property rdf:about="http://xmlns.com/foaf/0.1/name" vs:term_status="testing" rdfs:label="name" rdfs:comment="A name for some thing.">
+	<rdfs:label xml:lang="es">Nombre</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdfs:domain rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -279,6 +280,7 @@ we don't want the implied rdfs:domain here.
     <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#label"/>
   </rdf:Property>
   <rdf:Property rdf:about="http://xmlns.com/foaf/0.1/firstName" vs:term_status="testing" rdfs:label="firstName" rdfs:comment="The first name of a person.">
+	<rdfs:label xml:lang="es">Nombre de pila</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
@@ -307,6 +309,7 @@ we don't want the implied rdfs:domain here.
     <rdfs:isDefinedBy rdf:resource="http://xmlns.com/foaf/0.1/"/>
   </rdf:Property>
   <rdf:Property rdf:about="http://xmlns.com/foaf/0.1/family_name" vs:term_status="archaic" rdfs:label="family_name" rdfs:comment="The family name of some person.">
+	<rdfs:label xml:lang="es">Nombre de familia</rdfs:label>
     <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
@@ -314,7 +317,7 @@ we don't want the implied rdfs:domain here.
     <rdfs:isDefinedBy rdf:resource="http://xmlns.com/foaf/0.1/"/>
   </rdf:Property>
   <rdf:Property rdf:about="http://xmlns.com/foaf/0.1/familyName" vs:term_status="testing" rdfs:label="familyName" rdfs:comment="The family name of some person.">
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
+	<rdf:type rdf:resource="http://www.w3.org/2002/07/owl#DatatypeProperty"/>
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
     <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
